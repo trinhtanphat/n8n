@@ -3,16 +3,27 @@ import { defineStore } from 'pinia';
 import { useRootStore } from '@n8n/stores/useRootStore';
 import * as provisioningApi from '@n8n/rest-api-client/api/provisioning';
 import type { ProvisioningConfig } from '@n8n/rest-api-client/api/provisioning';
+import { useSettingsStore } from '@/app/stores/settings.store';
+import { EnterpriseEditionFeature } from '@/app/constants';
 
 /**
  * Composable to load and save provisioning config
  */
 export const useUserRoleProvisioningStore = defineStore('userRoleProvisioning', () => {
 	const rootStore = useRootStore();
+	const settingsStore = useSettingsStore();
 
 	const provisioningConfig = ref<ProvisioningConfig | undefined>();
 
+	const isProvisioningLicensed = () =>
+		Boolean(settingsStore.isEnterpriseFeatureEnabled[EnterpriseEditionFeature.Provisioning]);
+
 	const getProvisioningConfig = async () => {
+		if (!isProvisioningLicensed()) {
+			provisioningConfig.value = undefined;
+			return undefined;
+		}
+
 		try {
 			const config = await provisioningApi.getProvisioningConfig(rootStore.restApiContext);
 			provisioningConfig.value = config;
@@ -24,6 +35,10 @@ export const useUserRoleProvisioningStore = defineStore('userRoleProvisioning', 
 	};
 
 	const saveProvisioningConfig = async (config: Partial<ProvisioningConfig>) => {
+		if (!isProvisioningLicensed()) {
+			return provisioningConfig.value;
+		}
+
 		try {
 			const updatedConfig = await provisioningApi.saveProvisioningConfig(
 				rootStore.restApiContext,

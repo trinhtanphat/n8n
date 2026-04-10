@@ -52,7 +52,7 @@ const emailLabel = computed(() => {
 });
 
 const formConfig: IFormBoxConfig = reactive({
-	title: locale.baseText('auth.signin'),
+	title: 'VNSO Customer Sign in',
 	buttonText: locale.baseText('auth.signin'),
 	redirectText: locale.baseText('forgotPassword'),
 	redirectLink: '/forgot-password',

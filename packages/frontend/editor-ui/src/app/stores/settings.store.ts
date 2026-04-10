@@ -28,6 +28,13 @@ export const useSettingsStore = defineStore(STORES.SETTINGS, () => {
 		showSetupOnFirstLoad: false,
 		smtpSetup: false,
 		authenticationMethod: UserManagementAuthenticationMethod.Email,
+		publicSignupEnabled: false,
+		turnstileSiteKey: '',
+		socialLogin: {
+			google: { enabled: false, loginUrl: '' },
+			github: { enabled: false, loginUrl: '' },
+			facebook: { enabled: false, loginUrl: '' },
+		},
 	});
 	const templatesEndpointHealthy = ref(false);
 	const api = ref({

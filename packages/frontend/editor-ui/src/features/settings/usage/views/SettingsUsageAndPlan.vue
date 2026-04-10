@@ -159,9 +159,12 @@ const onActivationModalClose = () => {
 onMounted(async () => {
 	documentTitle.set(locale.baseText('settings.usageAndPlan.title'));
 	usageStore.setLoading(true);
-	if (route.query.key) {
+	const queryActivationKey =
+		typeof route.query.key === 'string' ? route.query.key.trim() : undefined;
+
+	if (queryActivationKey && canUserActivateLicense.value) {
 		try {
-			await usageStore.activateLicense(route.query.key as string);
+			await usageStore.activateLicense(queryActivationKey);
 			await router.replace({ query: {} });
 			showActivationSuccess();
 			usageStore.setLoading(false);
@@ -171,7 +174,7 @@ onMounted(async () => {
 		}
 	}
 	try {
-		if (!route.query.key && canUserActivateLicense.value) {
+		if (!queryActivationKey && canUserActivateLicense.value) {
 			await usageStore.refreshLicenseManagementToken();
 		} else {
 			await usageStore.getLicenseInfo();

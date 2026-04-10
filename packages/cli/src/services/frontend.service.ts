@@ -59,6 +59,15 @@ export type PublicFrontendSettings = {
 
 		/** Determines forgot password page UX */
 		smtpSetup: FrontendSettings['userManagement']['smtpSetup'];
+
+		/** Enables unauthenticated self-signup */
+		publicSignupEnabled: FrontendSettings['userManagement']['publicSignupEnabled'];
+
+		/** Cloudflare Turnstile site key for public signup */
+		turnstileSiteKey: FrontendSettings['userManagement']['turnstileSiteKey'];
+
+		/** Social login buttons and URLs */
+		socialLogin: FrontendSettings['userManagement']['socialLogin'];
 	};
 
 	enterprise: {
@@ -249,6 +258,22 @@ export class FrontendService {
 				showSetupOnFirstLoad: await this.getShowSetupOnFirstLoad(),
 				smtpSetup: this.mailer.isEmailSetUp,
 				authenticationMethod: getCurrentAuthenticationMethod(),
+				publicSignupEnabled: this.globalConfig.userManagement.publicSignup.enabled,
+				turnstileSiteKey: this.globalConfig.userManagement.publicSignup.turnstileSiteKey,
+				socialLogin: {
+					google: {
+						enabled: this.globalConfig.userManagement.socialLogin.google.enabled,
+						loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/google/login`,
+					},
+					github: {
+						enabled: this.globalConfig.userManagement.socialLogin.github.enabled,
+						loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/github/login`,
+					},
+					facebook: {
+						enabled: this.globalConfig.userManagement.socialLogin.facebook.enabled,
+						loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/facebook/login`,
+					},
+				},
 			},
 			sso: {
 				saml: {
@@ -420,6 +445,22 @@ export class FrontendService {
 			quota: this.license.getUsersLimit(),
 			authenticationMethod: getCurrentAuthenticationMethod(),
 			showSetupOnFirstLoad: await this.getShowSetupOnFirstLoad(),
+			publicSignupEnabled: this.globalConfig.userManagement.publicSignup.enabled,
+			turnstileSiteKey: this.globalConfig.userManagement.publicSignup.turnstileSiteKey,
+			socialLogin: {
+				google: {
+					enabled: this.globalConfig.userManagement.socialLogin.google.enabled,
+					loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/google/login`,
+				},
+				github: {
+					enabled: this.globalConfig.userManagement.socialLogin.github.enabled,
+					loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/github/login`,
+				},
+				facebook: {
+					enabled: this.globalConfig.userManagement.socialLogin.facebook.enabled,
+					loginUrl: `${instanceBaseUrl}/${restEndpoint}/public/oauth/facebook/login`,
+				},
+			},
 		});
 
 		let dismissedBanners: string[] = [];
@@ -583,6 +624,22 @@ export class FrontendService {
 				authenticationMethod,
 				showSetupOnFirstLoad,
 				smtpSetup,
+				publicSignupEnabled: this.globalConfig.userManagement.publicSignup.enabled,
+				turnstileSiteKey: this.globalConfig.userManagement.publicSignup.turnstileSiteKey,
+				socialLogin: {
+					google: {
+						enabled: this.globalConfig.userManagement.socialLogin.google.enabled,
+						loginUrl: `${this.urlService.getInstanceBaseUrl()}/${this.globalConfig.endpoints.rest}/public/oauth/google/login`,
+					},
+					github: {
+						enabled: this.globalConfig.userManagement.socialLogin.github.enabled,
+						loginUrl: `${this.urlService.getInstanceBaseUrl()}/${this.globalConfig.endpoints.rest}/public/oauth/github/login`,
+					},
+					facebook: {
+						enabled: this.globalConfig.userManagement.socialLogin.facebook.enabled,
+						loginUrl: `${this.urlService.getInstanceBaseUrl()}/${this.globalConfig.endpoints.rest}/public/oauth/facebook/login`,
+					},
+				},
 			},
 			sso: {
 				saml: {

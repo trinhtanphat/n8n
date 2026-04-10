@@ -59,6 +59,7 @@ const {
 			>
 				<SSOLogin v-if="withSso" />
 			</N8nFormBox>
+			<slot />
 		</div>
 	</div>
 </template>

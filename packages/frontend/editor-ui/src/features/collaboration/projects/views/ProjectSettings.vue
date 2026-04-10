@@ -5,11 +5,12 @@ import { useRouter } from 'vue-router';
 import { deepCopy } from 'n8n-workflow';
 import { useDebounceFn } from '@vueuse/core';
 import { useUsersStore } from '@/features/settings/users/users.store';
+import { useSettingsStore } from '@/app/stores/settings.store';
 import { useI18n } from '@n8n/i18n';
 import { type ResourceCounts, useProjectsStore } from '../projects.store';
 import type { Project, ProjectRelation, ProjectMemberData } from '../projects.types';
 import { useToast } from '@/app/composables/useToast';
-import { DEBOUNCE_TIME, getDebounceTime, VIEWS } from '@/app/constants';
+import { DEBOUNCE_TIME, EnterpriseEditionFeature, getDebounceTime, VIEWS } from '@/app/constants';
 import ProjectDeleteDialog from '../components/ProjectDeleteDialog.vue';
 import ProjectRoleUpgradeDialog from '../components/ProjectRoleUpgradeDialog.vue';
 import ProjectMembersTable from '../components/ProjectMembersTable.vue';
@@ -46,6 +47,7 @@ type FormDataDiff = {
 };
 
 const usersStore = useUsersStore();
+const settingsStore = useSettingsStore();
 const i18n = useI18n();
 const projectsStore = useProjectsStore();
 const rolesStore = useRolesStore();
@@ -539,13 +541,22 @@ const isExpressionMappingEnabled = computed(
 	() => userRoleProvisioningStore.provisioningConfig?.scopesUseExpressionMapping || false,
 );
 
+const isProvisioningLicensed = computed(
+	() => settingsStore.isEnterpriseFeatureEnabled[EnterpriseEditionFeature.Provisioning],
+);
+
 onMounted(async () => {
 	documentTitle.set(i18n.baseText('projects.settings'));
 
 	if (!canUpdateProject.value) return;
 
 	selectProjectNameIfMatchesDefault();
-	await Promise.all([userRoleProvisioningStore.getProvisioningConfig(), rolesStore.fetchRoles()]);
+	await Promise.all([
+		isProvisioningLicensed.value
+			? userRoleProvisioningStore.getProvisioningConfig()
+			: Promise.resolve(undefined),
+		rolesStore.fetchRoles(),
+	]);
 });
 </script>
 

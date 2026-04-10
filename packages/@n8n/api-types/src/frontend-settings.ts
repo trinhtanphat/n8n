@@ -35,6 +35,22 @@ export interface IUserManagementSettings {
 	showSetupOnFirstLoad?: boolean;
 	smtpSetup: boolean;
 	authenticationMethod: AuthenticationMethod;
+	publicSignupEnabled: boolean;
+	turnstileSiteKey: string;
+	socialLogin: {
+		google: {
+			enabled: boolean;
+			loginUrl: string;
+		};
+		github: {
+			enabled: boolean;
+			loginUrl: string;
+		};
+		facebook: {
+			enabled: boolean;
+			loginUrl: string;
+		};
+	};
 }
 
 export interface IEnterpriseSettings {

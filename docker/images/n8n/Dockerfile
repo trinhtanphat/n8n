@@ -6,8 +6,9 @@ ARG N8N_VERSION=snapshot
 FROM node:${NODE_VERSION}-alpine AS builder
 COPY ./compiled /usr/local/lib/node_modules/n8n
 RUN apk add --no-cache python3 make g++ && \
+    corepack enable && \
     cd /usr/local/lib/node_modules/n8n && \
-    npm rebuild sqlite3 isolated-vm
+    pnpm rebuild sqlite3 isolated-vm
 
 FROM n8nio/base:${NODE_VERSION}
 

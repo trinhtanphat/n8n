@@ -95,6 +95,69 @@ class EmailConfig {
 	template: TemplateConfig;
 }
 
+@Config
+class PublicSignupConfig {
+	/** Whether unauthenticated users can create accounts directly. */
+	@Env('N8N_PUBLIC_SIGNUP_ENABLED')
+	enabled: boolean = false;
+
+	/** Cloudflare Turnstile site key used by public signup page. */
+	@Env('N8N_PUBLIC_SIGNUP_TURNSTILE_SITE_KEY')
+	turnstileSiteKey: string = '';
+
+	/** Cloudflare Turnstile secret key used by backend verification. */
+	@Env('N8N_PUBLIC_SIGNUP_TURNSTILE_SECRET_KEY')
+	turnstileSecretKey: string = '';
+}
+
+@Config
+class GoogleSocialLoginConfig {
+	@Env('N8N_SOCIAL_LOGIN_GOOGLE_ENABLED')
+	enabled: boolean = false;
+
+	@Env('N8N_SOCIAL_LOGIN_GOOGLE_CLIENT_ID')
+	clientId: string = '';
+
+	@Env('N8N_SOCIAL_LOGIN_GOOGLE_CLIENT_SECRET')
+	clientSecret: string = '';
+}
+
+@Config
+class GithubSocialLoginConfig {
+	@Env('N8N_SOCIAL_LOGIN_GITHUB_ENABLED')
+	enabled: boolean = false;
+
+	@Env('N8N_SOCIAL_LOGIN_GITHUB_CLIENT_ID')
+	clientId: string = '';
+
+	@Env('N8N_SOCIAL_LOGIN_GITHUB_CLIENT_SECRET')
+	clientSecret: string = '';
+}
+
+@Config
+class FacebookSocialLoginConfig {
+	@Env('N8N_SOCIAL_LOGIN_FACEBOOK_ENABLED')
+	enabled: boolean = false;
+
+	@Env('N8N_SOCIAL_LOGIN_FACEBOOK_CLIENT_ID')
+	clientId: string = '';
+
+	@Env('N8N_SOCIAL_LOGIN_FACEBOOK_CLIENT_SECRET')
+	clientSecret: string = '';
+}
+
+@Config
+class SocialLoginConfig {
+	@Nested
+	google: GoogleSocialLoginConfig;
+
+	@Nested
+	github: GithubSocialLoginConfig;
+
+	@Nested
+	facebook: FacebookSocialLoginConfig;
+}
+
 const INVALID_JWT_REFRESH_TIMEOUT_WARNING =
 	'N8N_USER_MANAGEMENT_JWT_REFRESH_TIMEOUT_HOURS needs to be smaller than N8N_USER_MANAGEMENT_JWT_DURATION_HOURS. Setting N8N_USER_MANAGEMENT_JWT_REFRESH_TIMEOUT_HOURS to 0.';
 
@@ -105,6 +168,12 @@ export class UserManagementConfig {
 
 	@Nested
 	password: PasswordConfig;
+
+	@Nested
+	publicSignup: PublicSignupConfig;
+
+	@Nested
+	socialLogin: SocialLoginConfig;
 
 	/** JWT secret to use. If unset, n8n will generate its own. */
 	@Env('N8N_USER_MANAGEMENT_JWT_SECRET')

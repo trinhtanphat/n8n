@@ -80,6 +80,10 @@ const isExpressionMappingEnabled = computed(
 	() => userRoleProvisioningStore.provisioningConfig?.scopesUseExpressionMapping || false,
 );
 
+const isProvisioningLicensed = computed(
+	() => settingsStore.isEnterpriseFeatureEnabled[EnterpriseEditionFeature.Provisioning],
+);
+
 const isSSOEnabled = computed(() => !!ssoStore.isSamlLoginEnabled || !!ssoStore.isOidcLoginEnabled);
 
 onMounted(async () => {
@@ -89,7 +93,9 @@ onMounted(async () => {
 		await updateUsersTableData(usersTableState.value);
 	}
 
-	await userRoleProvisioningStore.getProvisioningConfig();
+	if (isProvisioningLicensed.value) {
+		await userRoleProvisioningStore.getProvisioningConfig();
+	}
 });
 
 const usersListActions = computed((): Array<UserAction<IUser>> => {
@@ -363,9 +369,15 @@ const updateUsersTableData = async ({ page, itemsPerPage, sortBy }: TableOptions
 async function onRoleChange(user: User, newRoleName: Role) {
 	if (newRoleName === user.role) return;
 
+	const selectedRole = userRoles.value.find(({ value }) => value === newRoleName);
+	if (selectedRole?.disabled) {
+		onGoToUpgradeAdvancedPermissions();
+		return;
+	}
+
 	const name =
 		user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : (user.email ?? '');
-	const role = userRoles.value.find(({ value }) => value === newRoleName)?.label ?? newRoleName;
+	const role = selectedRole?.label ?? newRoleName;
 
 	if (newRoleName === ROLE.ChatUser) {
 		const confirmed = await message.confirm(

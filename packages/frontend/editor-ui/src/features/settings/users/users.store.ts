@@ -30,7 +30,6 @@ import * as cloudApi from '@n8n/rest-api-client/api/cloudPlans';
 import * as invitationsApi from './invitation.api';
 import { computed, ref } from 'vue';
 import { useSettingsStore } from '@/app/stores/settings.store';
-import * as onboardingApi from '@/app/api/workflow-webhooks';
 import { hasPermission } from '@/app/utils/rbac/permissions';
 
 const _isPendingUser = (user: IUserResponse | null) => !!user?.isPending;
@@ -252,6 +251,19 @@ export const useUsersStore = defineStore(STORES.USERS, () => {
 		}
 	};
 
+	const publicSignup = async (params: {
+		email: string;
+		firstName: string;
+		lastName: string;
+		password: string;
+		turnstileToken?: string;
+	}) => {
+		const user = await usersApi.publicSignup(rootStore.restApiContext, params);
+		if (user) {
+			await setCurrentUser(user);
+		}
+	};
+
 	const validateSignupToken = async (params: { token: string }) => {
 		return await usersApi.validateSignupToken(rootStore.restApiContext, params);
 	};
@@ -420,14 +432,8 @@ export const useUsersStore = defineStore(STORES.USERS, () => {
 	};
 
 	const submitContactEmail = async (email: string, agree: boolean) => {
-		if (currentUser.value) {
-			return await onboardingApi.submitEmailOnSignup(
-				rootStore.instanceId,
-				currentUser.value,
-				email ?? currentUser.value.email,
-				agree,
-			);
-		}
+		void email;
+		void agree;
 		return null;
 	};
 
@@ -474,6 +480,7 @@ export const useUsersStore = defineStore(STORES.USERS, () => {
 		registerLoginHook,
 		registerLogoutHook,
 		createOwner,
+		publicSignup,
 		validateSignupToken,
 		acceptInvitation,
 		sendForgotPasswordEmail,

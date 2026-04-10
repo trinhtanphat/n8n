@@ -5,12 +5,15 @@ import { type UserRoleProvisioningSetting } from '../components/UserRoleProvisio
 import { type SupportedProtocolType } from '../../sso.store';
 import { useTelemetry } from '@/app/composables/useTelemetry';
 import { useRootStore } from '@n8n/stores/useRootStore';
+import { useSettingsStore } from '@/app/stores/settings.store';
+import { EnterpriseEditionFeature } from '@/app/constants';
 
 /**
  * Composable for managing user role provisioning form logic in SSO settings.
  */
 export function useUserRoleProvisioningForm(protocol: SupportedProtocolType) {
 	const provisioningStore = useUserRoleProvisioningStore();
+	const settingsStore = useSettingsStore();
 	const telemetry = useTelemetry();
 	const formValue = ref<UserRoleProvisioningSetting>('disabled');
 
@@ -103,6 +106,11 @@ export function useUserRoleProvisioningForm(protocol: SupportedProtocolType) {
 	};
 
 	const initFormValue = () => {
+		if (!settingsStore.isEnterpriseFeatureEnabled[EnterpriseEditionFeature.Provisioning]) {
+			formValue.value = 'disabled';
+			return;
+		}
+
 		void provisioningStore.getProvisioningConfig().then(() => {
 			formValue.value = getUserRoleProvisioningValueFromConfig(
 				provisioningStore.provisioningConfig,

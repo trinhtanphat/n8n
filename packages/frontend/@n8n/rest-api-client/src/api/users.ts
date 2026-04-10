@@ -1,6 +1,7 @@
 import type {
 	LoginRequestDto,
 	PasswordUpdateRequestDto,
+	PublicSignupRequestDto,
 	SettingsUpdateRequestDto,
 	UserSelfSettingsUpdateRequestDto,
 	UsersListFilterDto,
@@ -110,6 +111,18 @@ export async function setupOwner(
 		context,
 		'POST',
 		'/owner/setup',
+		params as unknown as IDataObject,
+	);
+}
+
+export async function publicSignup(
+	context: IRestApiContext,
+	params: PublicSignupRequestDto,
+): Promise<CurrentUserResponse> {
+	return await makeRestApiRequest(
+		context,
+		'POST',
+		'/public/signup',
 		params as unknown as IDataObject,
 	);
 }
