@@ -1,0 +1,61 @@
+services:
+  n8n-postgres:
+    image: postgres:16-alpine
+    container_name: n8n-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: n8n
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: n8nVNSO2026!Secure
+    volumes:
+      - n8n_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U n8n"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - n8n-net
+
+  n8n:
+    image: n8n-vnso:latest
+    container_name: n8n-vnso
+    restart: always
+    depends_on:
+      n8n-postgres:
+        condition: service_healthy
+    ports:
+      - "5678:5678"
+    environment:
+      # Database
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=n8n-postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n
+      - DB_POSTGRESDB_PASSWORD=n8nVNSO2026!Secure
+      # General
+      - N8N_HOST=n8n.vnso.vn
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://n8n.vnso.vn/
+      - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+      - TZ=Asia/Ho_Chi_Minh
+      # Security
+      - N8N_SECURE_COOKIE=true
+      # Branding
+      - N8N_TEMPLATES_ENABLED=true
+      # Disable public registration (admin creates users)
+      - N8N_USER_MANAGEMENT_DISABLED=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - n8n-net
+
+volumes:
+  n8n_postgres_data:
+  n8n_data:
+
+networks:
+  n8n-net:
+    driver: bridge

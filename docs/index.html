@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNSO N8N - Nền tảng Tự động hóa Quy trình</title>
+    <meta name="description" content="VNSO N8N - Nền tảng tự động hóa quy trình công việc mạnh mẽ, dễ sử dụng cho doanh nghiệp Việt Nam.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --secondary: #34a853;
+            --accent: #fbbc04;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --gradient: linear-gradient(135deg, #1a73e8 0%, #34a853 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 0;
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 1.5rem; font-weight: 700; color: var(--primary);
+            text-decoration: none;
+        }
+        .nav-logo img { height: 36px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-light);
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary); color: #fff !important;
+            padding: 0.5rem 1.25rem; border-radius: 8px;
+            font-weight: 600; transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--primary-dark); }
+
+        /* HERO */
+        .hero {
+            padding: 8rem 1.5rem 4rem;
+            text-align: center;
+            background: var(--gradient);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+            height: 80px;
+            background: var(--bg);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800; margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.25rem; max-width: 680px; margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-block; padding: 0.875rem 2rem;
+            border-radius: 10px; font-weight: 600; font-size: 1rem;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .btn-white { background: #fff; color: var(--primary); }
+        .btn-white:hover { background: #f0f4ff; transform: translateY(-2px); }
+        .btn-outline { border: 2px solid #fff; color: #fff; }
+        .btn-outline:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+        /* SECTIONS */
+        section { padding: 5rem 1.5rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .section-title p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .feature-icon {
+            width: 56px; height: 56px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 1rem;
+            background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(52,168,83,0.1));
+        }
+        .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* GUIDE */
+        .guide { background: var(--card-bg); }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            counter-reset: step;
+        }
+        .step {
+            position: relative;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            counter-increment: step;
+        }
+        .step::before {
+            content: counter(step);
+            position: absolute; top: -16px; left: 20px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--primary); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem;
+        }
+        .step h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+        .step p { color: var(--text-light); font-size: 0.9rem; }
+        .step code {
+            background: #f1f5f9; padding: 2px 6px; border-radius: 4px;
+            font-size: 0.85rem; color: var(--primary-dark);
+        }
+
+        /* USE CASES */
+        .usecases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .usecase {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .usecase h3 { color: var(--primary); margin-bottom: 0.5rem; }
+        .usecase ul {
+            color: var(--text-light); padding-left: 1.25rem;
+            font-size: 0.95rem;
+        }
+        .usecase li { margin-bottom: 0.25rem; }
+
+        /* SHORTCUTS TABLE */
+        .shortcuts-table {
+            width: 100%; border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .shortcuts-table th {
+            background: var(--primary); color: #fff;
+            padding: 0.75rem 1rem; text-align: left;
+        }
+        .shortcuts-table td {
+            padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+        }
+        .shortcuts-table tr:last-child td { border-bottom: none; }
+        .shortcuts-table kbd {
+            background: #f1f5f9; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.85rem; border: 1px solid var(--border);
+        }
+
+        /* CONTACT / TURNSTILE */
+        .contact-form {
+            max-width: 600px; margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block; margin-bottom: 0.5rem;
+            font-weight: 600; font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%; padding: 0.75rem 1rem;
+            border: 1px solid var(--border); border-radius: 8px;
+            font-size: 1rem; font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none; border-color: var(--primary);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .submit-btn {
+            background: var(--primary); color: #fff; border: none;
+            padding: 0.875rem 2rem; border-radius: 10px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            width: 100%; transition: background 0.2s;
+        }
+        .submit-btn:hover { background: var(--primary-dark); }
+
+        /* FOOTER */
+        footer {
+            background: #1e293b; color: #94a3b8;
+            padding: 3rem 1.5rem; text-align: center;
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+        .footer-links a { color: #94a3b8; }
+        .footer-links a:hover { color: #fff; }
+
+        /* API DOCS */
+        .api-section { background: #1e293b; color: #e2e8f0; border-radius: 16px; padding: 2rem; margin-top: 2rem; }
+        .api-section h3 { color: var(--accent); margin-bottom: 1rem; }
+        .api-section pre {
+            background: #0f172a; border-radius: 8px; padding: 1rem;
+            overflow-x: auto; font-size: 0.85rem; line-height: 1.5;
+        }
+        .api-section code { color: #a5f3fc; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 7rem 1rem 3rem; }
+            section { padding: 3rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <img src="favicon.ico" alt="VNSO">
+            VNSO N8N
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Tính năng</a></li>
+            <li><a href="#guide">Hướng dẫn</a></li>
+            <li><a href="#usecases">Ứng dụng</a></li>
+            <li><a href="#shortcuts">Phím tắt</a></li>
+            <li><a href="#api">API</a></li>
+            <li><a href="https://n8n.vnso.vn" class="nav-cta">Mở N8N &rarr;</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO / LANDING -->
+<section class="hero" id="home">
+    <h1>🚀 VNSO N8N</h1>
+    <p>Nền tảng tự động hóa quy trình công việc mạnh mẽ — Kết nối hơn 400+ ứng dụng, xây dựng workflow kéo thả trực quan, không cần lập trình.</p>
+    <div class="hero-btns">
+        <a href="https://n8n.vnso.vn" class="btn btn-white">Bắt đầu sử dụng</a>
+        <a href="#guide" class="btn btn-outline">Xem hướng dẫn</a>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Tính năng nổi bật</h2>
+            <p>Mọi thứ bạn cần để tự động hóa quy trình làm việc hiệu quả</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>400+ Kết nối tích hợp</h3>
+                <p>Google Sheets, Slack, Telegram, Gmail, MySQL, PostgreSQL, HTTP/Webhook, và hơn 400 ứng dụng khác.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Giao diện kéo thả</h3>
+                <p>Thiết kế workflow trực quan bằng cách kéo thả các node, kết nối chúng lại thành luồng xử lý hoàn chỉnh.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Trigger tự động</h3>
+                <p>Lên lịch chạy tự động theo thời gian (Cron), khi nhận webhook, email mới, hoặc bất kỳ sự kiện nào.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Bảo mật & Self-hosted</h3>
+                <p>Dữ liệu hoàn toàn nằm trên server của VNSO. Mã hóa credentials, quản lý phân quyền người dùng.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3>Code tùy chỉnh</h3>
+                <p>Sử dụng JavaScript/Python trong Function Node khi cần xử lý logic phức tạp.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Nhật ký thực thi</h3>
+                <p>Theo dõi lịch sử chạy, debug lỗi dễ dàng với execution log chi tiết từng bước.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GUIDE -->
+<section id="guide" class="guide">
+    <div class="container">
+        <div class="section-title">
+            <h2>Hướng dẫn sử dụng</h2>
+            <p>Bắt đầu tạo workflow tự động chỉ trong vài phút</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <h3>Đăng nhập hệ thống</h3>
+                <p>Truy cập <a href="https://n8n.vnso.vn" style="color:var(--primary)">https://n8n.vnso.vn</a> và đăng nhập bằng tài khoản được cấp. Lần đầu đăng nhập sẽ thiết lập tài khoản admin.</p>
+            </div>
+            <div class="step">
+                <h3>Tạo Workflow mới</h3>
+                <p>Nhấn nút <strong>"+"</strong> hoặc vào <strong>Workflows → New Workflow</strong>. Đặt tên mô tả cho workflow.</p>
+            </div>
+            <div class="step">
+                <h3>Thêm Node đầu tiên</h3>
+                <p>Click <strong>"+"</strong> trên canvas, chọn Trigger node (VD: <code>Schedule Trigger</code>, <code>Webhook</code>). Mỗi workflow cần ít nhất 1 trigger.</p>
+            </div>
+            <div class="step">
+                <h3>Kết nối các Node</h3>
+                <p>Thêm các node xử lý tiếp theo. Kéo đường nối từ output sang input. VD: <code>HTTP Request</code> → <code>Google Sheets</code>.</p>
+            </div>
+            <div class="step">
+                <h3>Cấu hình Credentials</h3>
+                <p>Vào <strong>Settings → Credentials</strong> để thêm API key, OAuth token. N8N mã hóa và lưu trữ an toàn.</p>
+            </div>
+            <div class="step">
+                <h3>Test &amp; Kích hoạt</h3>
+                <p>Nhấn <strong>"Test Workflow"</strong> để chạy thử. Khi ổn, bật <strong>Active toggle</strong> để workflow chạy tự động.</p>
+            </div>
+        </div>
+
+        <!-- Node types -->
+        <div style="margin-top:3rem">
+            <h3 style="text-align:center;margin-bottom:1.5rem">Các loại Node phổ biến</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🟢 Trigger Nodes</h3>
+                    <p><strong>Schedule Trigger</strong> — Chạy theo lịch (mỗi phút/giờ/ngày)<br>
+                    <strong>Webhook</strong> — Nhận dữ liệu từ bên ngoài<br>
+                    <strong>Email Trigger</strong> — Khi có email mới</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔵 Action Nodes</h3>
+                    <p><strong>HTTP Request</strong> — Gọi API bất kỳ<br>
+                    <strong>Send Email</strong> — Gửi email tự động<br>
+                    <strong>Google Sheets</strong> — Đọc/ghi spreadsheet</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🟡 Logic Nodes</h3>
+                    <p><strong>IF</strong> — Rẽ nhánh theo điều kiện<br>
+                    <strong>Switch</strong> — Nhiều nhánh điều kiện<br>
+                    <strong>Merge</strong> — Gộp dữ liệu từ nhiều nguồn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ứng dụng thực tế</h2>
+            <p>Một số workflow mẫu cho doanh nghiệp</p>
+        </div>
+        <div class="usecases-grid">
+            <div class="usecase">
+                <h3>📧 Tự động gửi báo cáo</h3>
+                <ul>
+                    <li>Schedule Trigger (hàng ngày 8:00)</li>
+                    <li>HTTP Request → lấy dữ liệu từ API</li>
+                    <li>Function → xử lý, tổng hợp</li>
+                    <li>Send Email → gửi cho quản lý</li>
+                </ul>
+            </div>
+            <div class="usecase">
+                <h3>💬 Chatbot Telegram</h3>
+                <ul>
+                    <li>Telegram Trigger → nhận tin nhắn</li>
+                    <li>Switch → phân loại nội dung</li>
+                    <li>HTTP Request → gọi AI API</li>
+                    <li>Telegram → trả lời tự động</li>
+                </ul>
+            </div>
+            <div class="usecase">
+                <h3>📋 Đồng bộ dữ liệu</h3>
+                <ul>
+                    <li>Webhook → nhận từ hệ thống ERP</li>
+                    <li>IF → kiểm tra dữ liệu hợp lệ</li>
+                    <li>MySQL → cập nhật database</li>
+                    <li>Slack → thông báo kết quả</li>
+                </ul>
+            </div>
+            <div class="usecase">
+                <h3>📁 Xử lý file tự động</h3>
+                <ul>
+                    <li>Google Drive Trigger → file mới</li>
+                    <li>Function → đổi tên, phân loại</li>
+                    <li>Move file → thư mục đích</li>
+                    <li>Email → thông báo hoàn tất</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SHORTCUTS -->
+<section id="shortcuts" class="guide">
+    <div class="container">
+        <div class="section-title">
+            <h2>Phím tắt hữu ích</h2>
+            <p>Tăng tốc làm việc với các phím tắt trong N8N Editor</p>
+        </div>
+        <table class="shortcuts-table">
+            <thead>
+                <tr><th>Phím tắt</th><th>Chức năng</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>Tạo workflow mới</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>Lưu workflow</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>E</kbd></td><td>Chạy (Execute) workflow</td></tr>
+                <tr><td><kbd>Tab</kbd></td><td>Mở thanh tìm kiếm node</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>C / V</kbd></td><td>Copy / Paste node</td></tr>
+                <tr><td><kbd>Delete</kbd></td><td>Xóa node đang chọn</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>Undo</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd></td><td>Redo</td></tr>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>A</kbd></td><td>Chọn tất cả nodes</td></tr>
+                <tr><td><kbd>D</kbd></td><td>Disable/Enable node</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- API -->
+<section id="api">
+    <div class="container">
+        <div class="section-title">
+            <h2>Webhook & API</h2>
+            <p>Tích hợp N8N với hệ thống bên ngoài qua Webhook</p>
+        </div>
+        <div class="api-section">
+            <h3>Tạo Webhook nhận dữ liệu</h3>
+            <pre><code># Gửi dữ liệu đến webhook N8N
+curl -X POST https://n8n.vnso.vn/webhook/your-webhook-id \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Nguyen Van A",
+    "email": "a@vnso.vn",
+    "action": "new_order"
+  }'</code></pre>
+        </div>
+        <div class="api-section">
+            <h3>Sử dụng N8N REST API</h3>
+            <pre><code># Liệt kê tất cả workflows
+curl -X GET https://n8n.vnso.vn/api/v1/workflows \
+  -H "X-N8N-API-KEY: your-api-key"
+
+# Kích hoạt workflow
+curl -X PATCH https://n8n.vnso.vn/api/v1/workflows/{id}/activate \
+  -H "X-N8N-API-KEY: your-api-key"
+
+# Lấy lịch sử thực thi
+curl -X GET https://n8n.vnso.vn/api/v1/executions \
+  -H "X-N8N-API-KEY: your-api-key"</code></pre>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT / TURNSTILE -->
+<section id="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Liên hệ hỗ trợ</h2>
+            <p>Gửi yêu cầu hỗ trợ hoặc đăng ký tài khoản</p>
+        </div>
+        <div class="contact-form">
+            <form id="contactForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" id="fullname" name="fullname" required placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="email@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Nội dung</label>
+                    <textarea id="message" name="message" required placeholder="Mô tả yêu cầu của bạn..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACrpvBF4cpsFFY_t" data-theme="light"></div>
+                </div>
+                <button type="submit" class="submit-btn">Gửi yêu cầu</button>
+            </form>
+            <div id="formResult" style="margin-top:1rem;text-align:center;display:none;"></div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="#home">Trang chủ</a>
+        <a href="#features">Tính năng</a>
+        <a href="#guide">Hướng dẫn</a>
+        <a href="https://n8n.vnso.vn">Mở N8N</a>
+        <a href="https://docs.n8n.io" target="_blank">Tài liệu N8N gốc</a>
+    </div>
+    <p>&copy; 2026 VNSO. Powered by <a href="https://n8n.io" target="_blank">n8n</a> — Self-hosted Workflow Automation.</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const turnstileResponse = formData.get('cf-turnstile-response');
+
+    if (!turnstileResponse) {
+        showResult('⚠️ Vui lòng xác minh Turnstile trước khi gửi.', '#e74c3c');
+        return false;
+    }
+
+    // In production, send to your backend which verifies with Turnstile secret key (server-side only)
+    showResult('✅ Yêu cầu đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm nhất.', 'var(--secondary)');
+    e.target.reset();
+    turnstile.reset();
+    return false;
+}
+
+function showResult(msg, color) {
+    const el = document.getElementById('formResult');
+    el.style.display = 'block';
+    el.style.color = color;
+    el.textContent = msg;
+    setTimeout(() => { el.style.display = 'none'; }, 5000);
+}
+</script>
+
+</body>
+</html>
