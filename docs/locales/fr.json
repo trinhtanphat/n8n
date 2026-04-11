@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "usecases": "Cas d'usage",
+    "guide": "Guide",
+    "enterprise": "Entreprise",
+    "api": "API",
+    "launch": "Lancer N8N"
+  },
+  "hero": {
+    "badge": "Édition Entreprise • Toutes les fonctionnalités déverrouillées",
+    "title": "Automatisez tous vos workflows",
+    "desc": "Connectez 400+ applications, construisez des workflows en glisser-déposer, déployez en toute sécurité avec VNSO N8N.",
+    "start": "🚀 Commencer",
+    "guide": "📖 Voir le guide",
+    "stat1": "Intégrations natives",
+    "stat2": "Workflows illimités",
+    "stat3": "Auto-hébergé & sécurisé",
+    "stat4": "Langues supportées"
+  },
+  "features": {
+    "title": "Fonctionnalités clés",
+    "desc": "Tout ce dont vous avez besoin pour automatiser vos workflows",
+    "f1": {
+      "title": "400+ Intégrations",
+      "desc": "Connectez Gmail, Slack, Telegram, Google Sheets, Notion, MySQL, PostgreSQL, REST API et des centaines d'autres."
+    },
+    "f2": {
+      "title": "Glisser-Déposer visuel",
+      "desc": "Éditeur visuel intuitif, sans code. Concevez des workflows complexes par simple glisser-déposer."
+    },
+    "f3": {
+      "title": "Déclencheurs variés",
+      "desc": "Déclenchez par Webhook, Cron, événements email, messages Telegram, changements de base de données, et plus."
+    },
+    "f4": {
+      "title": "Auto-hébergé & Sécurisé",
+      "desc": "Déploiement local, contrôle total des données. HTTPS, cookies sécurisés, MFA, SAML, LDAP, OIDC."
+    },
+    "f5": {
+      "title": "Code personnalisé & IA",
+      "desc": "Écrivez du JavaScript/Python personnalisé. Intégrez OpenAI, LangChain, Agent IA pour l'automatisation intelligente."
+    },
+    "f6": {
+      "title": "Surveillance & Gestion",
+      "desc": "Journaux d'exécution détaillés, débogage dans l'éditeur, contrôle de version, audit, tableau de bord insights."
+    }
+  },
+  "enterprise": {
+    "title": "Fonctionnalités Entreprise",
+    "desc": "Toutes les fonctionnalités Enterprise déverrouillées",
+    "saml": "Connexion unique avec fournisseurs SAML 2.0",
+    "ldap": "Synchronisation utilisateurs depuis Active Directory/LDAP",
+    "oidc": "OpenID Connect pour l'authentification moderne",
+    "roles_title": "Rôles personnalisés",
+    "roles": "Permissions détaillées avec rôles personnalisés",
+    "audit": "Journalisation complète des activités",
+    "source": "Gestion des workflows avec Git",
+    "secrets": "Intégration HashiCorp Vault, AWS Secrets Manager",
+    "insights": "Suivi des performances avec graphiques détaillés",
+    "projects_title": "Projets d'équipe",
+    "projects": "Projets d'équipe illimités & collaboration",
+    "debug_title": "Débogage dans l'éditeur",
+    "debug": "Déboguez les workflows directement dans l'éditeur visuel",
+    "vars_title": "Variables",
+    "vars": "Variables partagées dans tout l'espace de travail",
+    "ai": "Assistant IA pour la construction de workflows"
+  },
+  "usecases": {
+    "title": "Cas d'utilisation réels",
+    "desc": "Workflows populaires que vous pouvez créer immédiatement",
+    "u1": {
+      "title": "Chatbot Telegram intelligent",
+      "desc": "Chatbot IA pour réponses automatiques, service client 24/7, intégré avec OpenAI GPT."
+    },
+    "u2": {
+      "title": "Demandes RH automatisées",
+      "desc": "Réception demande de congé → envoi approbation → mise à jour présence → notification résultat."
+    },
+    "u3": {
+      "title": "Synchronisation multi-plateforme",
+      "desc": "Synchronisation entre CRM, ERP, Google Sheets, cohérence en temps réel."
+    },
+    "u4": {
+      "title": "Pipeline de notifications CI/CD",
+      "desc": "Webhook GitHub → build → envoi résultats via Slack/Email avec logs détaillés."
+    },
+    "u5": {
+      "tag": "Rapport",
+      "title": "Rapports quotidiens automatiques",
+      "desc": "Collecte métriques → génération rapport PDF/Excel → envoi email à la direction."
+    },
+    "u6": {
+      "title": "Traitement de documents IA",
+      "desc": "Upload factures → OCR + IA extraction → sauvegarde BD → création ticket traitement."
+    }
+  },
+  "guide": {
+    "title": "Démarrez en 5 minutes",
+    "desc": "De la connexion à votre premier workflow",
+    "s1": {
+      "title": "Connexion / Inscription",
+      "desc": "Visitez n8n.vnso.vn, connectez-vous par email ou créez un nouveau compte."
+    },
+    "s2": {
+      "title": "Créer un nouveau workflow",
+      "desc": "Appuyez sur Ctrl+Alt+N ou cliquez 'Ajouter workflow'. Donnez-lui un nom descriptif."
+    },
+    "s3": {
+      "title": "Ajouter un nœud déclencheur",
+      "desc": "Choisissez un déclencheur : Webhook, Schedule, Email, Telegram... Le premier nœud est toujours un déclencheur."
+    },
+    "s4": {
+      "title": "Connecter les nœuds d'action",
+      "desc": "Glissez-déposez les nœuds de traitement : envoyer email, appeler API, traiter données. Connectez avec des fils."
+    },
+    "s5": {
+      "title": "Tester & Déboguer",
+      "desc": "Cliquez 'Tester workflow' pour exécuter. Vérifiez la sortie par nœud, déboguez dans l'éditeur."
+    },
+    "s6": {
+      "title": "Activer & Surveiller",
+      "desc": "Activez le toggle 'Active' pour l'exécution automatique. Surveillez dans l'onglet Exécutions."
+    }
+  },
+  "shortcuts": {
+    "title": "Raccourcis utiles",
+    "key": "Raccourci",
+    "action": "Action",
+    "new": "Créer nouveau workflow",
+    "save": "Sauvegarder workflow",
+    "run": "Exécuter workflow",
+    "add": "Ajouter nouveau nœud",
+    "copy": "Copier/Coller nœud",
+    "undo": "Annuler",
+    "delete": "Supprimer nœud sélectionné",
+    "disable": "Activer/Désactiver nœud",
+    "fit": "Ajuster la vue"
+  },
+  "api": {
+    "title": "REST API & Webhook",
+    "desc": "Intégrez avec n'importe quel système via API"
+  },
+  "footer": {
+    "product": "Produit",
+    "resources": "Ressources",
+    "tech": "Technologie",
+    "powered": "Propulsé par"
+  }
+}

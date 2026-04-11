@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "features": "功能特性",
+    "usecases": "应用场景",
+    "guide": "使用指南",
+    "enterprise": "企业版",
+    "api": "API",
+    "launch": "启动 N8N"
+  },
+  "hero": {
+    "badge": "企业版 • 全部功能已解锁",
+    "title": "自动化一切工作流程",
+    "desc": "连接400+应用，可视化拖拽构建工作流，使用VNSO N8N安全部署。",
+    "start": "🚀 立即开始",
+    "guide": "📖 查看指南",
+    "stat1": "内置集成",
+    "stat2": "无限工作流",
+    "stat3": "自托管 & 安全",
+    "stat4": "支持语言"
+  },
+  "features": {
+    "title": "核心功能",
+    "desc": "自动化工作流程所需的一切",
+    "f1": {
+      "title": "400+ 集成",
+      "desc": "连接 Gmail、Slack、Telegram、Google Sheets、Notion、MySQL、PostgreSQL、REST API 等数百个应用。"
+    },
+    "f2": {
+      "title": "可视化拖拽",
+      "desc": "直观的可视化编辑器，无需编码。通过简单拖拽设计复杂工作流。"
+    },
+    "f3": {
+      "title": "多样触发器",
+      "desc": "通过 Webhook、Cron、邮件事件、Telegram 消息、数据库变更等触发。"
+    },
+    "f4": {
+      "title": "自托管 & 安全",
+      "desc": "本地部署，完全控制数据。支持 HTTPS、安全Cookie、MFA、SAML、LDAP、OIDC。"
+    },
+    "f5": {
+      "title": "自定义代码 & AI",
+      "desc": "编写自定义 JavaScript/Python。集成 OpenAI、LangChain、AI Agent 实现智能自动化。"
+    },
+    "f6": {
+      "title": "管理与监控",
+      "desc": "详细执行日志、编辑器内调试、版本控制、审计日志和洞察面板。"
+    }
+  },
+  "enterprise": {
+    "title": "企业版功能",
+    "desc": "全部企业版功能已解锁",
+    "saml": "SAML 2.0 提供商单点登录",
+    "ldap": "从 Active Directory/LDAP 同步用户",
+    "oidc": "OpenID Connect 现代身份验证",
+    "roles_title": "自定义角色",
+    "roles": "细粒度自定义角色权限",
+    "audit": "完整活动日志",
+    "source": "使用 Git 版本控制管理工作流",
+    "secrets": "集成 HashiCorp Vault、AWS Secrets Manager",
+    "insights": "详细图表跟踪工作流性能",
+    "projects_title": "团队项目",
+    "projects": "无限团队项目与协作",
+    "debug_title": "编辑器内调试",
+    "debug": "直接在可视化编辑器中调试工作流",
+    "vars_title": "变量",
+    "vars": "工作区共享变量",
+    "ai": "AI 助手帮助构建工作流"
+  },
+  "usecases": {
+    "title": "实际应用",
+    "desc": "您可以立即构建的热门工作流",
+    "u1": {
+      "title": "智能聊天机器人",
+      "desc": "AI 聊天机器人自动回复，24/7 客户服务，集成 OpenAI GPT。"
+    },
+    "u2": {
+      "title": "自动化人事请求",
+      "desc": "接收请假申请 → 发送审批 → 更新考勤 → 通知结果。"
+    },
+    "u3": {
+      "title": "多平台数据同步",
+      "desc": "在 CRM、ERP、Google Sheets 之间同步数据，确保实时一致性。"
+    },
+    "u4": {
+      "title": "CI/CD 通知流水线",
+      "desc": "GitHub webhook → 构建 → 通过 Slack/Email 发送详细日志结果。"
+    },
+    "u5": {
+      "tag": "报告",
+      "title": "自动日报",
+      "desc": "收集指标 → 生成 PDF/Excel 报告 → 邮件发送给管理层。"
+    },
+    "u6": {
+      "title": "AI 文档处理",
+      "desc": "上传发票 → OCR + AI 提取 → 保存数据库 → 创建处理工单。"
+    }
+  },
+  "guide": {
+    "title": "5分钟快速入门",
+    "desc": "从登录到第一个工作流",
+    "s1": {
+      "title": "登录 / 注册",
+      "desc": "访问 n8n.vnso.vn，使用邮箱登录或创建新账号。"
+    },
+    "s2": {
+      "title": "创建新工作流",
+      "desc": "按 Ctrl+Alt+N 或点击「添加工作流」，给它一个描述性名称。"
+    },
+    "s3": {
+      "title": "添加触发节点",
+      "desc": "选择触发器：Webhook、Schedule、Email、Telegram... 第一个节点始终是触发器。"
+    },
+    "s4": {
+      "title": "连接操作节点",
+      "desc": "拖拽处理节点：发送邮件、调用API、处理数据。用线连接。"
+    },
+    "s5": {
+      "title": "测试与调试",
+      "desc": "点击「测试工作流」运行。查看每个节点的输出，在编辑器中调试。"
+    },
+    "s6": {
+      "title": "激活与监控",
+      "desc": "开启「Active」开关自动运行。在执行记录标签中监控。"
+    }
+  },
+  "shortcuts": {
+    "title": "常用快捷键",
+    "key": "快捷键",
+    "action": "操作",
+    "new": "创建新工作流",
+    "save": "保存工作流",
+    "run": "运行工作流",
+    "add": "添加新节点",
+    "copy": "复制/粘贴节点",
+    "undo": "撤销",
+    "delete": "删除选中节点",
+    "disable": "启用/禁用节点",
+    "fit": "适应视图"
+  },
+  "api": {
+    "title": "REST API & Webhook",
+    "desc": "通过 API 与任何系统集成"
+  },
+  "footer": {
+    "product": "产品",
+    "resources": "资源",
+    "tech": "技术",
+    "powered": "技术支持"
+  }
+}

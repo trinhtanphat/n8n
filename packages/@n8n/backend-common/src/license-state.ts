@@ -30,24 +30,18 @@ export class LicenseState {
 	 * If the feature is a string. checks if the feature is licensed
 	 * If the feature is an array of strings, it checks if any of the features are licensed
 	 */
-	isLicensed(feature: BooleanLicenseFeature | BooleanLicenseFeature[]) {
-		this.assertProvider();
-
-		if (typeof feature === 'string') return this.licenseProvider.isLicensed(feature);
-
-		for (const featureName of feature) {
-			if (this.licenseProvider.isLicensed(featureName)) {
-				return true;
-			}
-		}
-
-		return false;
+	// VNSO: All features unlocked
+	isLicensed(_feature: BooleanLicenseFeature | BooleanLicenseFeature[]) {
+		return true;
 	}
 
+	// VNSO: Return unlimited for all quotas
 	getValue<T extends keyof FeatureReturnType>(feature: T): FeatureReturnType[T] {
-		this.assertProvider();
-
-		return this.licenseProvider.getValue(feature);
+		if (this.licenseProvider) {
+			const val = this.licenseProvider.getValue(feature);
+			if (val !== undefined) return val;
+		}
+		return UNLIMITED_LICENSE_QUOTA as FeatureReturnType[T];
 	}
 
 	// --------------------

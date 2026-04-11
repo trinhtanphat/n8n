@@ -4,6 +4,386 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VNSO N8N - Nền tảng Tự động hóa Quy trình</title>
+    <meta name="description" content="VNSO N8N - Nền tảng tự động hóa quy trình công việc mạnh mẽ, dễ sử dụng, hỗ trợ 400+ tích hợp.">
+    <meta name="keywords" content="n8n, vnso, automation, workflow, tự động hóa, quy trình">
+    <meta property="og:title" content="VNSO N8N - Automation Platform">
+    <meta property="og:description" content="Nền tảng tự động hóa quy trình công việc mạnh mẽ cho doanh nghiệp Việt Nam.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trinhtanphat.github.io/n8n/">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://trinhtanphat.github.io/n8n/">
+    <style>
+        :root {
+            --primary: #ff6d5a;
+            --primary-dark: #e85a48;
+            --primary-light: #ff8c7c;
+            --secondary: #1a1a2e;
+            --accent: #00d4aa;
+            --accent-dark: #00b894;
+            --bg: #0f0f23;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #252541;
+            --text: #e8e8f0;
+            --text-muted: #9898b0;
+            --border: #2a2a45;
+            --gradient: linear-gradient(135deg, #ff6d5a 0%, #ff8c7c 50%, #00d4aa 100%);
+            --shadow: 0 4px 24px rgba(0,0,0,0.3);
+            --shadow-glow: 0 0 40px rgba(255,109,90,0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+        }
+        [data-theme="light"] {
+            --bg: #f5f5fa; --bg-card: #ffffff; --bg-card-hover: #f0f0f8;
+            --text: #1a1a2e; --text-muted: #6b6b80; --border: #e0e0e8;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-glow: 0 0 40px rgba(255,109,90,0.08);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter','Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; overflow-x:hidden; }
+
+        .navbar { position:fixed;top:0;width:100%;z-index:100;background:rgba(15,15,35,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s; }
+        [data-theme="light"] .navbar { background:rgba(245,245,250,0.9); }
+        .nav-inner { max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px; }
+        .nav-brand { display:flex;align-items:center;gap:10px;text-decoration:none; }
+        .nav-brand svg { width:32px;height:32px; }
+        .nav-brand span { font-weight:700;font-size:1.2rem;color:var(--text); }
+        .nav-links { display:flex;gap:8px;align-items:center; }
+        .nav-links a { color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:var(--radius-sm);font-size:.9rem;font-weight:500;transition:all .2s; }
+        .nav-links a:hover,.nav-links a.active { color:var(--primary);background:rgba(255,109,90,0.1); }
+        .nav-cta { background:var(--primary)!important;color:#fff!important;padding:8px 20px!important;border-radius:24px!important;font-weight:600!important; }
+        .nav-cta:hover { background:var(--primary-dark)!important;transform:translateY(-1px); }
+        .theme-toggle { background:none;border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:1.1rem;transition:all .2s; }
+        .theme-toggle:hover { border-color:var(--primary); }
+        .hamburger { display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer; }
+        .lang-select { background:var(--bg-card);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:var(--radius-sm);cursor:pointer;font-size:.85rem; }
+
+        .hero { min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 24px 60px; }
+        .hero::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(255,109,90,.12) 0%,transparent 60%),radial-gradient(circle at 70% 60%,rgba(0,212,170,.08) 0%,transparent 60%); }
+        .hero-content { max-width:800px;text-align:center;position:relative;z-index:1; }
+        .hero-badge { display:inline-flex;align-items:center;gap:8px;background:rgba(255,109,90,.1);border:1px solid rgba(255,109,90,.2);padding:6px 16px;border-radius:24px;font-size:.85rem;color:var(--primary);font-weight:500;margin-bottom:24px; }
+        .hero h1 { font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:20px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+        .hero p { font-size:1.2rem;color:var(--text-muted);max-width:600px;margin:0 auto 36px; }
+        .hero-buttons { display:flex;gap:16px;justify-content:center;flex-wrap:wrap; }
+        .btn { display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:28px;font-size:1rem;font-weight:600;text-decoration:none;transition:all .3s;cursor:pointer;border:none; }
+        .btn-primary { background:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(255,109,90,.3); }
+        .btn-primary:hover { background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,109,90,.4); }
+        .btn-outline { background:transparent;color:var(--text);border:2px solid var(--border); }
+        .btn-outline:hover { border-color:var(--primary);color:var(--primary); }
+        .hero-stats { display:flex;justify-content:center;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border); }
+        .stat { text-align:center; }
+        .stat-num { font-size:2rem;font-weight:800;color:var(--primary); }
+        .stat-label { font-size:.85rem;color:var(--text-muted); }
+
+        section { padding:100px 24px; }
+        .section-inner { max-width:1200px;margin:0 auto; }
+        .section-header { text-align:center;margin-bottom:60px; }
+        .section-header h2 { font-size:2.5rem;font-weight:700;margin-bottom:16px; }
+        .section-header p { font-size:1.1rem;color:var(--text-muted);max-width:600px;margin:0 auto; }
+
+        .features-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px; }
+        .feature-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .3s;position:relative;overflow:hidden; }
+        .feature-card:hover { border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-glow); }
+        .feature-icon { width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px;background:rgba(255,109,90,.1); }
+        .feature-card:nth-child(2) .feature-icon { background:rgba(0,212,170,.1); }
+        .feature-card:nth-child(3) .feature-icon { background:rgba(100,100,255,.1); }
+        .feature-card:nth-child(4) .feature-icon { background:rgba(255,189,0,.1); }
+        .feature-card:nth-child(5) .feature-icon { background:rgba(180,80,255,.1); }
+        .feature-card:nth-child(6) .feature-icon { background:rgba(0,180,255,.1); }
+        .feature-card h3 { font-size:1.2rem;margin-bottom:10px; }
+        .feature-card p { color:var(--text-muted);font-size:.95rem; }
+
+        .enterprise-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px; }
+        .enterprise-item { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;transition:all .3s; }
+        .enterprise-item:hover { border-color:var(--accent);transform:translateY(-2px); }
+        .enterprise-item .icon { font-size:2rem;margin-bottom:12px; }
+        .enterprise-item h3 { font-size:1rem;margin-bottom:6px; }
+        .enterprise-item p { color:var(--text-muted);font-size:.85rem; }
+
+        .usecases-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px; }
+        .usecase { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s; }
+        .usecase:hover { border-color:var(--accent); }
+        .usecase-tag { display:inline-block;background:rgba(0,212,170,.1);color:var(--accent);padding:4px 12px;border-radius:12px;font-size:.8rem;font-weight:600;margin-bottom:12px; }
+        .usecase h3 { font-size:1.1rem;margin-bottom:8px; }
+        .usecase p { color:var(--text-muted);font-size:.9rem; }
+
+        .guide-steps { display:flex;flex-direction:column;gap:24px;max-width:800px;margin:0 auto; }
+        .step { display:flex;gap:24px;align-items:flex-start;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .3s; }
+        .step:hover { border-color:var(--primary); }
+        .step-num { min-width:48px;height:48px;border-radius:50%;background:var(--gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;flex-shrink:0; }
+        .step h3 { font-size:1.1rem;margin-bottom:6px; }
+        .step p { color:var(--text-muted);font-size:.9rem; }
+
+        .shortcuts-table { width:100%;border-collapse:separate;border-spacing:0;background:var(--bg-card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border); }
+        .shortcuts-table th { background:rgba(255,109,90,.1);text-align:left;padding:14px 20px;font-weight:600;font-size:.9rem; }
+        .shortcuts-table td { padding:12px 20px;border-top:1px solid var(--border);font-size:.9rem; }
+        .shortcuts-table tr:hover td { background:var(--bg-card-hover); }
+        kbd { background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-family:'SF Mono',monospace;font-size:.85rem; }
+
+        .api-section { background:var(--bg-card);border-radius:var(--radius);overflow:hidden; }
+        .api-tab-bar { display:flex;border-bottom:1px solid var(--border);overflow-x:auto; }
+        .api-tab { padding:14px 24px;cursor:pointer;font-size:.9rem;font-weight:500;color:var(--text-muted);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap; }
+        .api-tab.active { color:var(--primary);border-bottom-color:var(--primary); }
+        .api-content { padding:24px; }
+        .api-content pre { background:#0a0a1a;color:#a0ffa0;border-radius:var(--radius-sm);padding:20px;overflow-x:auto;font-size:.85rem;line-height:1.6; }
+        [data-theme="light"] .api-content pre { background:#1e1e2e; }
+        .api-panel { display:none; }
+        .api-panel.active { display:block; }
+
+        footer { background:var(--bg-card);border-top:1px solid var(--border);padding:60px 24px; }
+        .footer-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px; }
+        .footer-col h4 { font-size:.9rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;color:var(--text-muted); }
+        .footer-col a { display:block;color:var(--text);text-decoration:none;margin-bottom:8px;font-size:.9rem;transition:color .2s; }
+        .footer-col a:hover { color:var(--primary); }
+        .footer-bottom { max-width:1200px;margin:40px auto 0;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--text-muted);font-size:.85rem; }
+
+        @media (max-width:768px) {
+            .nav-links { display:none; }
+            .hamburger { display:block; }
+            .nav-links.open { display:flex;flex-direction:column;position:absolute;top:64px;left:0;width:100%;background:var(--bg-card);border-bottom:1px solid var(--border);padding:16px; }
+            .hero-stats { flex-direction:column;gap:20px; }
+            .hero h1 { font-size:2.2rem; }
+            .features-grid,.usecases-grid,.enterprise-grid { grid-template-columns:1fr; }
+        }
+
+        .fade-in { opacity:0;transform:translateY(24px);transition:all .6s ease-out; }
+        .fade-in.visible { opacity:1;transform:translateY(0); }
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+        .floating { animation:float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="url(#g1)"/><path d="M12 28V12l8 8 8-8v16" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#ff6d5a"/><stop offset="1" stop-color="#00d4aa"/></linearGradient></defs></svg>
+                <span>VNSO N8N</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#features" data-i18n="nav.features">Tính năng</a>
+                <a href="#usecases" data-i18n="nav.usecases">Ứng dụng</a>
+                <a href="#guide" data-i18n="nav.guide">Hướng dẫn</a>
+                <a href="#enterprise" data-i18n="nav.enterprise">Enterprise</a>
+                <a href="#api" data-i18n="nav.api">API</a>
+                <select class="lang-select" id="langSelect" aria-label="Language">
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="pt">🇧🇷 Português</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                    <option value="th">🇹🇭 ไทย</option>
+                    <option value="id">🇮🇩 Bahasa</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="nl">🇳🇱 Nederlands</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="uk">🇺🇦 Українська</option>
+                    <option value="sv">🇸🇪 Svenska</option>
+                </select>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <a href="https://n8n.vnso.vn" class="nav-cta" data-i18n="nav.launch">Truy cập N8N</a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge floating">⚡ <span data-i18n="hero.badge">Enterprise Edition • Full Features Unlocked</span></div>
+            <h1 data-i18n="hero.title">Tự động hóa mọi quy trình công việc</h1>
+            <p data-i18n="hero.desc">Kết nối 400+ ứng dụng, xây dựng workflow kéo-thả trực quan, triển khai nội bộ an toàn với VNSO N8N.</p>
+            <div class="hero-buttons">
+                <a href="https://n8n.vnso.vn" class="btn btn-primary" data-i18n="hero.start">🚀 Bắt đầu ngay</a>
+                <a href="#guide" class="btn btn-outline" data-i18n="hero.guide">📖 Xem hướng dẫn</a>
+                <a href="https://github.com/trinhtanphat/n8n" class="btn btn-outline">⭐ GitHub</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><div class="stat-num">400+</div><div class="stat-label" data-i18n="hero.stat1">Tích hợp sẵn</div></div>
+                <div class="stat"><div class="stat-num">∞</div><div class="stat-label" data-i18n="hero.stat2">Workflow không giới hạn</div></div>
+                <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-i18n="hero.stat3">Self-hosted & bảo mật</div></div>
+                <div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-i18n="hero.stat4">Ngôn ngữ hỗ trợ</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="features.title">Tính năng nổi bật</h2><p data-i18n="features.desc">Mọi thứ bạn cần để tự động hóa quy trình công việc</p></div>
+            <div class="features-grid">
+                <div class="feature-card fade-in"><div class="feature-icon">🔗</div><h3 data-i18n="features.f1.title">400+ Tích hợp</h3><p data-i18n="features.f1.desc">Kết nối Gmail, Slack, Telegram, Google Sheets, Notion, MySQL, PostgreSQL, REST API và hàng trăm ứng dụng khác.</p></div>
+                <div class="feature-card fade-in"><div class="feature-icon">🎨</div><h3 data-i18n="features.f2.title">Kéo & Thả trực quan</h3><p data-i18n="features.f2.desc">Giao diện visual editor trực quan, không cần code. Thiết kế workflow phức tạp chỉ với thao tác kéo-thả.</p></div>
+                <div class="feature-card fade-in"><div class="feature-icon">⚡</div><h3 data-i18n="features.f3.title">Trigger đa dạng</h3><p data-i18n="features.f3.desc">Kích hoạt bằng Webhook, Cron, sự kiện email, Telegram message, database change, và nhiều nguồn khác.</p></div>
+                <div class="feature-card fade-in"><div class="feature-icon">🔒</div><h3 data-i18n="features.f4.title">Self-hosted & Bảo mật</h3><p data-i18n="features.f4.desc">Triển khai nội bộ, kiểm soát hoàn toàn dữ liệu. Hỗ trợ HTTPS, cookie bảo mật, MFA, SAML, LDAP, OIDC.</p></div>
+                <div class="feature-card fade-in"><div class="feature-icon">🧩</div><h3 data-i18n="features.f5.title">Custom Code & AI</h3><p data-i18n="features.f5.desc">Viết JavaScript/Python tùy chỉnh. Tích hợp OpenAI, LangChain, AI Agent cho automation thông minh.</p></div>
+                <div class="feature-card fade-in"><div class="feature-icon">📊</div><h3 data-i18n="features.f6.title">Quản lý & Giám sát</h3><p data-i18n="features.f6.desc">Execution logs chi tiết, debug trong editor, version control, audit logs, và insights dashboard.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="enterprise" style="background:var(--bg-card);">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="enterprise.title">Enterprise Features</h2><p data-i18n="enterprise.desc">Đã mở khóa toàn bộ tính năng Enterprise Edition</p></div>
+            <div class="enterprise-grid">
+                <div class="enterprise-item fade-in"><div class="icon">🔐</div><h3>SAML SSO</h3><p data-i18n="enterprise.saml">Single Sign-On với nhà cung cấp SAML 2.0</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">📁</div><h3>LDAP</h3><p data-i18n="enterprise.ldap">Đồng bộ người dùng từ Active Directory / LDAP</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🆔</div><h3>OIDC</h3><p data-i18n="enterprise.oidc">OpenID Connect cho xác thực hiện đại</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">👥</div><h3 data-i18n="enterprise.roles_title">Custom Roles</h3><p data-i18n="enterprise.roles">Phân quyền chi tiết với vai trò tùy chỉnh</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">📝</div><h3>Audit Logs</h3><p data-i18n="enterprise.audit">Ghi nhật ký hoạt động đầy đủ</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🔀</div><h3>Source Control</h3><p data-i18n="enterprise.source">Quản lý workflow với Git version control</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🗝️</div><h3>External Secrets</h3><p data-i18n="enterprise.secrets">Tích hợp HashiCorp Vault, AWS Secrets Manager</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">📈</div><h3>Insights Dashboard</h3><p data-i18n="enterprise.insights">Theo dõi hiệu suất workflow chi tiết</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🏢</div><h3 data-i18n="enterprise.projects_title">Team Projects</h3><p data-i18n="enterprise.projects">Không giới hạn team projects & collaboration</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🔍</div><h3 data-i18n="enterprise.debug_title">Debug in Editor</h3><p data-i18n="enterprise.debug">Debug workflow trực tiếp trong editor</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">📋</div><h3 data-i18n="enterprise.vars_title">Variables</h3><p data-i18n="enterprise.vars">Biến dùng chung cho toàn bộ workspace</p></div>
+                <div class="enterprise-item fade-in"><div class="icon">🤖</div><h3>AI Assistant</h3><p data-i18n="enterprise.ai">Trợ lý AI hỗ trợ xây dựng workflow</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usecases">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="usecases.title">Ứng dụng thực tế</h2><p data-i18n="usecases.desc">Những workflow phổ biến bạn có thể xây dựng ngay</p></div>
+            <div class="usecases-grid">
+                <div class="usecase fade-in"><span class="usecase-tag">Marketing</span><h3 data-i18n="usecases.u1.title">Chatbot Telegram/Zalo thông minh</h3><p data-i18n="usecases.u1.desc">Chatbot AI trả lời tự động, chăm sóc khách hàng 24/7, tích hợp OpenAI GPT.</p></div>
+                <div class="usecase fade-in"><span class="usecase-tag">HR</span><h3 data-i18n="usecases.u2.title">Tự động xử lý đơn từ nhân sự</h3><p data-i18n="usecases.u2.desc">Nhận đơn nghỉ phép → gửi duyệt → cập nhật chấm công → thông báo kết quả.</p></div>
+                <div class="usecase fade-in"><span class="usecase-tag">Data</span><h3 data-i18n="usecases.u3.title">Đồng bộ dữ liệu đa nền tảng</h3><p data-i18n="usecases.u3.desc">Sync dữ liệu giữa CRM, ERP, Google Sheets, đảm bảo nhất quán real-time.</p></div>
+                <div class="usecase fade-in"><span class="usecase-tag">DevOps</span><h3 data-i18n="usecases.u4.title">CI/CD Notification Pipeline</h3><p data-i18n="usecases.u4.desc">Webhook GitHub → build → gửi kết quả qua Slack/Email với log chi tiết.</p></div>
+                <div class="usecase fade-in"><span class="usecase-tag" data-i18n="usecases.u5.tag">Report</span><h3 data-i18n="usecases.u5.title">Báo cáo tự động hàng ngày</h3><p data-i18n="usecases.u5.desc">Thu thập metrics → tạo báo cáo PDF/Excel → gửi email cho ban lãnh đạo.</p></div>
+                <div class="usecase fade-in"><span class="usecase-tag">AI</span><h3 data-i18n="usecases.u6.title">AI Document Processing</h3><p data-i18n="usecases.u6.desc">Upload hóa đơn → OCR + AI trích xuất → lưu database → tạo ticket xử lý.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guide" style="background:var(--bg-card);">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="guide.title">Bắt đầu trong 5 phút</h2><p data-i18n="guide.desc">Từ đăng nhập đến workflow đầu tiên</p></div>
+            <div class="guide-steps">
+                <div class="step fade-in"><div class="step-num">1</div><div><h3 data-i18n="guide.s1.title">Đăng nhập / Đăng ký</h3><p data-i18n="guide.s1.desc">Truy cập n8n.vnso.vn, đăng nhập bằng email hoặc tạo tài khoản mới.</p></div></div>
+                <div class="step fade-in"><div class="step-num">2</div><div><h3 data-i18n="guide.s2.title">Tạo Workflow mới</h3><p data-i18n="guide.s2.desc">Click Ctrl+Alt+N hoặc nút "Add workflow". Đặt tên mô tả rõ ràng.</p></div></div>
+                <div class="step fade-in"><div class="step-num">3</div><div><h3 data-i18n="guide.s3.title">Thêm Trigger Node</h3><p data-i18n="guide.s3.desc">Chọn trigger: Webhook, Schedule, Email, Telegram... Node đầu tiên luôn là trigger.</p></div></div>
+                <div class="step fade-in"><div class="step-num">4</div><div><h3 data-i18n="guide.s4.title">Kết nối Action Nodes</h3><p data-i18n="guide.s4.desc">Kéo-thả node xử lý: gửi email, gọi API, xử lý dữ liệu. Nối bằng dây.</p></div></div>
+                <div class="step fade-in"><div class="step-num">5</div><div><h3 data-i18n="guide.s5.title">Test & Debug</h3><p data-i18n="guide.s5.desc">Click "Test workflow" để chạy thử. Xem output từng node, debug trong editor.</p></div></div>
+                <div class="step fade-in"><div class="step-num">6</div><div><h3 data-i18n="guide.s6.title">Kích hoạt & Giám sát</h3><p data-i18n="guide.s6.desc">Bật toggle "Active" để workflow chạy tự động. Theo dõi trong tab Executions.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shortcuts">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="shortcuts.title">Phím tắt hữu ích</h2></div>
+            <table class="shortcuts-table fade-in">
+                <thead><tr><th data-i18n="shortcuts.key">Phím tắt</th><th data-i18n="shortcuts.action">Hành động</th></tr></thead>
+                <tbody>
+                    <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd></td><td data-i18n="shortcuts.new">Tạo workflow mới</td></tr>
+                    <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td data-i18n="shortcuts.save">Lưu workflow</td></tr>
+                    <tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td data-i18n="shortcuts.run">Chạy workflow</td></tr>
+                    <tr><td><kbd>Tab</kbd></td><td data-i18n="shortcuts.add">Thêm node mới</td></tr>
+                    <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd>/<kbd>V</kbd></td><td data-i18n="shortcuts.copy">Copy / Paste node</td></tr>
+                    <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td data-i18n="shortcuts.undo">Undo</td></tr>
+                    <tr><td><kbd>Delete</kbd></td><td data-i18n="shortcuts.delete">Xóa node đã chọn</td></tr>
+                    <tr><td><kbd>D</kbd></td><td data-i18n="shortcuts.disable">Bật/Tắt node</td></tr>
+                    <tr><td><kbd>F</kbd></td><td data-i18n="shortcuts.fit">Fit view</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="api" style="background:var(--bg-card);">
+        <div class="section-inner">
+            <div class="section-header fade-in"><h2 data-i18n="api.title">REST API & Webhook</h2><p data-i18n="api.desc">Tích hợp với bất kỳ hệ thống nào qua API</p></div>
+            <div class="api-section fade-in">
+                <div class="api-tab-bar">
+                    <div class="api-tab active" data-tab="webhook">Webhook</div>
+                    <div class="api-tab" data-tab="rest">REST API</div>
+                    <div class="api-tab" data-tab="python">Python</div>
+                    <div class="api-tab" data-tab="curl">cURL</div>
+                </div>
+                <div class="api-content">
+                    <div class="api-panel active" id="tab-webhook"><pre><code># Webhook URL format
+POST https://n8n.vnso.vn/webhook/&lt;webhook-id&gt;
+
+# Example: Trigger a workflow
+curl -X POST https://n8n.vnso.vn/webhook/abc-123 \
+  -H "Content-Type: application/json" \
+  -d '{"event":"new_order","customer":"Nguyen Van A","amount":500000}'</code></pre></div>
+                    <div class="api-panel" id="tab-rest"><pre><code># List workflows
+GET https://n8n.vnso.vn/api/v1/workflows
+Headers: X-N8N-API-KEY: your-api-key
+
+# Execute workflow
+POST https://n8n.vnso.vn/api/v1/workflows/{id}/execute
+Body: {"data":{"key":"value"}}
+
+# Get execution
+GET https://n8n.vnso.vn/api/v1/executions/{executionId}</code></pre></div>
+                    <div class="api-panel" id="tab-python"><pre><code>import requests
+
+# Trigger via webhook
+resp = requests.post(
+    "https://n8n.vnso.vn/webhook/abc-123",
+    json={"event": "process_doc", "file_url": "https://example.com/doc.pdf"}
+)
+print(resp.json())
+
+# REST API
+headers = {"X-N8N-API-KEY": "your-api-key"}
+workflows = requests.get(
+    "https://n8n.vnso.vn/api/v1/workflows", headers=headers
+).json()</code></pre></div>
+                    <div class="api-panel" id="tab-curl"><pre><code># List workflows
+curl -s https://n8n.vnso.vn/api/v1/workflows \
+  -H "X-N8N-API-KEY: your-api-key" | python3 -m json.tool
+
+# Activate workflow
+curl -X PATCH https://n8n.vnso.vn/api/v1/workflows/{id} \
+  -H "X-N8N-API-KEY: your-api-key" \
+  -d '{"active":true}'</code></pre></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-col"><h4 data-i18n="footer.product">Sản phẩm</h4><a href="#features" data-i18n="nav.features">Tính năng</a><a href="#enterprise">Enterprise</a><a href="#api">API</a><a href="#shortcuts" data-i18n="shortcuts.title">Phím tắt</a></div>
+            <div class="footer-col"><h4 data-i18n="footer.resources">Tài nguyên</h4><a href="#guide" data-i18n="nav.guide">Hướng dẫn</a><a href="#usecases" data-i18n="nav.usecases">Ứng dụng</a><a href="https://docs.n8n.io" target="_blank" rel="noopener">n8n Docs</a><a href="https://community.n8n.io" target="_blank" rel="noopener">Community</a></div>
+            <div class="footer-col"><h4>VNSO</h4><a href="https://vnso.vn" target="_blank" rel="noopener">vnso.vn</a><a href="https://n8n.vnso.vn" target="_blank" rel="noopener">n8n.vnso.vn</a><a href="https://github.com/trinhtanphat/n8n" target="_blank" rel="noopener">GitHub</a></div>
+            <div class="footer-col"><h4 data-i18n="footer.tech">Công nghệ</h4><a href="#">n8n v2.16.0</a><a href="#">Docker + PostgreSQL</a><a href="#">Cloudflare SSL</a><a href="#">Enterprise Unlocked</a></div>
+        </div>
+        <div class="footer-bottom">© 2026 VNSO N8N — <span data-i18n="footer.powered">Powered by</span> <a href="https://n8n.io" target="_blank" rel="noopener" style="color:var(--primary);">n8n</a></div>
+    </footer>
+
+    <script>
+    const themeToggle=document.getElementById('themeToggle');
+    const saved=localStorage.getItem('theme')||'dark';
+    if(saved==='light'){document.documentElement.dataset.theme='light';themeToggle.textContent='☀️';}
+    themeToggle.addEventListener('click',()=>{const l=document.documentElement.dataset.theme==='light';document.documentElement.dataset.theme=l?'':'light';themeToggle.textContent=l?'🌙':'☀️';localStorage.setItem('theme',l?'dark':'light');});
+    document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
+    document.querySelectorAll('.api-tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.api-tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.api-panel').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('tab-'+t.dataset.tab).classList.add('active');});});
+    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+    document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+    // i18n
+    const translations={};
+    const langSelect=document.getElementById('langSelect');
+    async function loadLocale(l){if(translations[l])return translations[l];try{const r=await fetch('locales/'+l+'.json');if(!r.ok)return null;translations[l]=await r.json();return translations[l];}catch{return null;}}
+    function applyLocale(m){if(!m)return;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');const v=k.split('.').reduce((o,p)=>o&&o[p],m);if(v)el.textContent=v;});}
+    langSelect.addEventListener('change',async()=>{const l=langSelect.value;localStorage.setItem('lang',l);document.documentElement.lang=l;if(l==='vi'){location.reload();return;}const m=await loadLocale(l);applyLocale(m);});
+    const sl=localStorage.getItem('lang');if(sl&&sl!=='vi'){langSelect.value=sl;document.documentElement.lang=sl;loadLocale(sl).then(applyLocale);}
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNSO N8N - Nền tảng Tự động hóa Quy trình</title>
     <meta name="description" content="VNSO N8N - Nền tảng tự động hóa quy trình công việc mạnh mẽ, dễ sử dụng cho doanh nghiệp Việt Nam.">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

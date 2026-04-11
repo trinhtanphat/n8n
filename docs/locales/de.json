@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "features": "Funktionen",
+    "usecases": "Anwendungsfälle",
+    "guide": "Anleitung",
+    "enterprise": "Enterprise",
+    "api": "API",
+    "launch": "N8N öffnen"
+  },
+  "hero": {
+    "badge": "Enterprise Edition • Alle Funktionen freigeschaltet",
+    "title": "Automatisieren Sie jeden Workflow",
+    "desc": "Verbinden Sie 400+ Apps, erstellen Sie visuelle Drag-and-Drop-Workflows, stellen Sie sicher mit VNSO N8N bereit.",
+    "start": "🚀 Jetzt starten",
+    "guide": "📖 Anleitung ansehen",
+    "stat1": "Integrierte Verbindungen",
+    "stat2": "Unbegrenzte Workflows",
+    "stat3": "Selbst gehostet & sicher",
+    "stat4": "Unterstützte Sprachen"
+  },
+  "features": {
+    "title": "Hauptfunktionen",
+    "desc": "Alles was Sie für die Workflow-Automatisierung brauchen",
+    "f1": {
+      "title": "400+ Integrationen",
+      "desc": "Verbinden Sie Gmail, Slack, Telegram, Google Sheets, Notion, MySQL, PostgreSQL, REST API und hunderte mehr."
+    },
+    "f2": {
+      "title": "Visuelles Drag & Drop",
+      "desc": "Intuitiver visueller Editor, kein Code erforderlich. Entwerfen Sie komplexe Workflows per Drag & Drop."
+    },
+    "f3": {
+      "title": "Vielfältige Trigger",
+      "desc": "Auslösung per Webhook, Cron, E-Mail-Events, Telegram-Nachrichten, Datenbankänderungen und mehr."
+    },
+    "f4": {
+      "title": "Selbst gehostet & Sicher",
+      "desc": "On-Premise-Bereitstellung, volle Datenkontrolle. HTTPS, sichere Cookies, MFA, SAML, LDAP, OIDC."
+    },
+    "f5": {
+      "title": "Custom Code & KI",
+      "desc": "Schreiben Sie eigenen JavaScript/Python-Code. Integrieren Sie OpenAI, LangChain, KI-Agent für smarte Automatisierung."
+    },
+    "f6": {
+      "title": "Überwachung & Verwaltung",
+      "desc": "Detaillierte Ausführungsprotokolle, Debugging im Editor, Versionskontrolle, Audit-Logs, Insights-Dashboard."
+    }
+  },
+  "enterprise": {
+    "title": "Enterprise-Funktionen",
+    "desc": "Alle Enterprise-Funktionen freigeschaltet",
+    "saml": "Single Sign-On mit SAML 2.0 Anbietern",
+    "ldap": "Benutzer aus Active Directory/LDAP synchronisieren",
+    "oidc": "OpenID Connect für moderne Authentifizierung",
+    "roles_title": "Benutzerdefinierte Rollen",
+    "roles": "Detaillierte Berechtigungen mit benutzerdefinierten Rollen",
+    "audit": "Vollständige Aktivitätsprotokollierung",
+    "source": "Workflows mit Git-Versionskontrolle verwalten",
+    "secrets": "HashiCorp Vault, AWS Secrets Manager Integration",
+    "insights": "Workflow-Leistung mit detaillierten Diagrammen verfolgen",
+    "projects_title": "Teamprojekte",
+    "projects": "Unbegrenzte Teamprojekte & Zusammenarbeit",
+    "debug_title": "Debugging im Editor",
+    "debug": "Workflows direkt im visuellen Editor debuggen",
+    "vars_title": "Variablen",
+    "vars": "Gemeinsame Variablen für den gesamten Workspace",
+    "ai": "KI-Assistent beim Workflow-Aufbau"
+  },
+  "usecases": {
+    "title": "Praxisbeispiele",
+    "desc": "Beliebte Workflows zum sofortigen Aufbau",
+    "u1": {
+      "title": "Intelligenter Chatbot",
+      "desc": "KI-Chatbot für automatische Antworten, 24/7 Kundenservice, OpenAI GPT integriert."
+    },
+    "u2": {
+      "title": "Automatisierte HR-Anfragen",
+      "desc": "Urlaubsantrag empfangen → Genehmigung senden → Anwesenheit aktualisieren → Ergebnis benachrichtigen."
+    },
+    "u3": {
+      "title": "Multi-Plattform-Datensynchronisation",
+      "desc": "Daten zwischen CRM, ERP, Google Sheets synchronisieren, Echtzeit-Konsistenz sicherstellen."
+    },
+    "u4": {
+      "title": "CI/CD-Benachrichtigungspipeline",
+      "desc": "GitHub Webhook → Build → Ergebnisse via Slack/Email mit detaillierten Logs senden."
+    },
+    "u5": {
+      "tag": "Bericht",
+      "title": "Automatische Tagesberichte",
+      "desc": "Metriken sammeln → PDF/Excel-Bericht erstellen → per E-Mail an Management senden."
+    },
+    "u6": {
+      "title": "KI-Dokumentenverarbeitung",
+      "desc": "Rechnungen hochladen → OCR + KI-Extraktion → in DB speichern → Bearbeitungsticket erstellen."
+    }
+  },
+  "guide": {
+    "title": "In 5 Minuten starten",
+    "desc": "Vom Login zum ersten Workflow",
+    "s1": {
+      "title": "Anmelden / Registrieren",
+      "desc": "Besuchen Sie n8n.vnso.vn, melden Sie sich per E-Mail an oder erstellen Sie ein neues Konto."
+    },
+    "s2": {
+      "title": "Neuen Workflow erstellen",
+      "desc": "Drücken Sie Ctrl+Alt+N oder klicken Sie 'Workflow hinzufügen'. Geben Sie einen beschreibenden Namen."
+    },
+    "s3": {
+      "title": "Trigger-Node hinzufügen",
+      "desc": "Trigger wählen: Webhook, Schedule, Email, Telegram... Der erste Node ist immer ein Trigger."
+    },
+    "s4": {
+      "title": "Action-Nodes verbinden",
+      "desc": "Verarbeitungs-Nodes per Drag & Drop: E-Mail senden, API aufrufen, Daten verarbeiten. Mit Drähten verbinden."
+    },
+    "s5": {
+      "title": "Testen & Debuggen",
+      "desc": "'Workflow testen' klicken. Ausgabe pro Node prüfen, im Editor debuggen."
+    },
+    "s6": {
+      "title": "Aktivieren & Überwachen",
+      "desc": "'Active' Toggle für automatische Ausführung. Im Ausführungs-Tab überwachen."
+    }
+  },
+  "shortcuts": {
+    "title": "Nützliche Tastenkürzel",
+    "key": "Tastenkürzel",
+    "action": "Aktion",
+    "new": "Neuen Workflow erstellen",
+    "save": "Workflow speichern",
+    "run": "Workflow ausführen",
+    "add": "Neuen Node hinzufügen",
+    "copy": "Kopieren/Einfügen",
+    "undo": "Rückgängig",
+    "delete": "Ausgewählten Node löschen",
+    "disable": "Node aktivieren/deaktivieren",
+    "fit": "Ansicht anpassen"
+  },
+  "api": {
+    "title": "REST API & Webhook",
+    "desc": "Integration mit jedem System über API"
+  },
+  "footer": {
+    "product": "Produkt",
+    "resources": "Ressourcen",
+    "tech": "Technologie",
+    "powered": "Unterstützt von"
+  }
+}

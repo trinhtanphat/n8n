@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "features": "기능",
+    "usecases": "활용 사례",
+    "guide": "가이드",
+    "enterprise": "엔터프라이즈",
+    "api": "API",
+    "launch": "N8N 열기"
+  },
+  "hero": {
+    "badge": "엔터프라이즈 에디션 • 모든 기능 잠금 해제",
+    "title": "모든 워크플로우를 자동화하세요",
+    "desc": "400개 이상의 앱 연결, 비주얼 드래그 앤 드롭으로 워크플로우 구축, VNSO N8N으로 안전하게 배포.",
+    "start": "🚀 시작하기",
+    "guide": "📖 가이드 보기",
+    "stat1": "내장 통합",
+    "stat2": "무제한 워크플로우",
+    "stat3": "셀프 호스팅 & 보안",
+    "stat4": "지원 언어"
+  },
+  "features": {
+    "title": "주요 기능",
+    "desc": "워크플로우 자동화에 필요한 모든 것",
+    "f1": {
+      "title": "400+ 통합",
+      "desc": "Gmail, Slack, Telegram, Google Sheets, Notion, MySQL, PostgreSQL, REST API 등 수백 개 앱 연결."
+    },
+    "f2": {
+      "title": "비주얼 드래그 앤 드롭",
+      "desc": "직관적인 비주얼 에디터, 코드 불필요. 간단한 드래그 앤 드롭으로 복잡한 워크플로우 설계."
+    },
+    "f3": {
+      "title": "다양한 트리거",
+      "desc": "Webhook, Cron, 이메일 이벤트, Telegram 메시지, DB 변경 등으로 트리거."
+    },
+    "f4": {
+      "title": "셀프 호스팅 & 보안",
+      "desc": "온프레미스 배포, 완전한 데이터 제어. HTTPS, 보안 쿠키, MFA, SAML, LDAP, OIDC 지원."
+    },
+    "f5": {
+      "title": "커스텀 코드 & AI",
+      "desc": "JavaScript/Python 커스텀 코드. OpenAI, LangChain, AI Agent로 스마트 자동화."
+    },
+    "f6": {
+      "title": "모니터링 & 관리",
+      "desc": "상세 실행 로그, 에디터 내 디버그, 버전 관리, 감사 로그, 인사이트 대시보드."
+    }
+  },
+  "enterprise": {
+    "title": "엔터프라이즈 기능",
+    "desc": "모든 엔터프라이즈 기능 잠금 해제됨",
+    "saml": "SAML 2.0 제공자로 싱글 사인온",
+    "ldap": "Active Directory/LDAP에서 사용자 동기화",
+    "oidc": "OpenID Connect로 현대적 인증",
+    "roles_title": "커스텀 역할",
+    "roles": "커스텀 역할로 세밀한 권한 관리",
+    "audit": "규정 준수를 위한 완전한 활동 로그",
+    "source": "Git 버전 관리로 워크플로우 관리",
+    "secrets": "HashiCorp Vault, AWS Secrets Manager 통합",
+    "insights": "상세 차트로 워크플로우 성능 추적",
+    "projects_title": "팀 프로젝트",
+    "projects": "무제한 팀 프로젝트 & 협업",
+    "debug_title": "에디터 내 디버그",
+    "debug": "비주얼 에디터에서 직접 워크플로우 디버그",
+    "vars_title": "변수",
+    "vars": "전체 워크스페이스 공유 변수",
+    "ai": "워크플로우 구축을 돕는 AI 어시스턴트"
+  },
+  "usecases": {
+    "title": "실제 활용 사례",
+    "desc": "지금 바로 구축할 수 있는 인기 워크플로우",
+    "u1": {
+      "title": "스마트 챗봇",
+      "desc": "AI 자동 응답 챗봇, 24/7 고객 관리, OpenAI GPT 통합."
+    },
+    "u2": {
+      "title": "HR 요청 자동화",
+      "desc": "휴가 신청 접수 → 승인 전송 → 출근 업데이트 → 결과 알림."
+    },
+    "u3": {
+      "title": "멀티 플랫폼 데이터 동기화",
+      "desc": "CRM, ERP, Google Sheets 간 데이터 동기화, 실시간 일관성 보장."
+    },
+    "u4": {
+      "title": "CI/CD 알림 파이프라인",
+      "desc": "GitHub webhook → 빌드 → Slack/Email로 상세 로그 결과 전송."
+    },
+    "u5": {
+      "tag": "보고서",
+      "title": "자동 일일 보고서",
+      "desc": "메트릭 수집 → PDF/Excel 보고서 생성 → 경영진에게 이메일 전송."
+    },
+    "u6": {
+      "title": "AI 문서 처리",
+      "desc": "청구서 업로드 → OCR + AI 추출 → DB 저장 → 처리 티켓 생성."
+    }
+  },
+  "guide": {
+    "title": "5분 만에 시작",
+    "desc": "로그인부터 첫 워크플로우까지",
+    "s1": {
+      "title": "로그인 / 가입",
+      "desc": "n8n.vnso.vn 방문, 이메일로 로그인 또는 새 계정 생성."
+    },
+    "s2": {
+      "title": "새 워크플로우 생성",
+      "desc": "Ctrl+Alt+N 또는 '워크플로우 추가' 클릭. 설명적 이름 지정."
+    },
+    "s3": {
+      "title": "트리거 노드 추가",
+      "desc": "트리거 선택: Webhook, Schedule, Email, Telegram... 첫 노드는 항상 트리거."
+    },
+    "s4": {
+      "title": "액션 노드 연결",
+      "desc": "처리 노드 드래그 앤 드롭: 이메일 전송, API 호출, 데이터 처리. 와이어로 연결."
+    },
+    "s5": {
+      "title": "테스트 & 디버그",
+      "desc": "'워크플로우 테스트' 클릭 실행. 노드별 출력 확인, 에디터 내 디버그."
+    },
+    "s6": {
+      "title": "활성화 & 모니터링",
+      "desc": "'Active' 토글로 자동 실행. 실행 탭에서 모니터링."
+    }
+  },
+  "shortcuts": {
+    "title": "유용한 단축키",
+    "key": "단축키",
+    "action": "동작",
+    "new": "새 워크플로우 생성",
+    "save": "워크플로우 저장",
+    "run": "워크플로우 실행",
+    "add": "새 노드 추가",
+    "copy": "복사/붙여넣기",
+    "undo": "실행 취소",
+    "delete": "선택 노드 삭제",
+    "disable": "노드 활성화/비활성화",
+    "fit": "뷰 맞춤"
+  },
+  "api": {
+    "title": "REST API & Webhook",
+    "desc": "API로 모든 시스템과 통합"
+  },
+  "footer": {
+    "product": "제품",
+    "resources": "리소스",
+    "tech": "기술",
+    "powered": "Powered by"
+  }
+}

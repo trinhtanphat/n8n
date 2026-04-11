@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "features": "Funkcje",
+    "usecases": "Zastosowania",
+    "guide": "Przewodnik",
+    "enterprise": "Korporacja",
+    "api": "API",
+    "launch": "Otwórz N8N"
+  },
+  "hero": {
+    "badge": "Edycja Enterprise • Wszystkie funkcje odblokowane",
+    "title": "Zautomatyzuj każdy workflow",
+    "desc": "Połącz 400+ aplikacji, buduj wizualne workflow metodą przeciągnij-i-upuść, wdrażaj bezpiecznie z VNSO N8N.",
+    "start": "🚀 Rozpocznij",
+    "guide": "📖 Zobacz przewodnik",
+    "stat1": "Wbudowane integracje",
+    "stat2": "Nieograniczone workflow",
+    "stat3": "Self-hosted i bezpieczny",
+    "stat4": "Obsługiwane języki"
+  },
+  "features": {
+    "title": "Kluczowe funkcje",
+    "desc": "Wszystko czego potrzebujesz do automatyzacji workflow",
+    "f1": {
+      "title": "400+ Integrations",
+      "desc": "Connect Gmail, Slack, Telegram, Google Sheets, Notion, MySQL, PostgreSQL, REST API and hundreds more."
+    },
+    "f2": {
+      "title": "Visual Drag & Drop",
+      "desc": "Intuitive visual editor, no code needed. Design complex workflows with simple drag-and-drop."
+    },
+    "f3": {
+      "title": "Diverse Triggers",
+      "desc": "Trigger by Webhook, Cron, email events, Telegram messages, database changes, and many more."
+    },
+    "f4": {
+      "title": "Self-hosted & Secure",
+      "desc": "Deploy on-premise, full data control. HTTPS, secure cookies, MFA, SAML, LDAP, OIDC support."
+    },
+    "f5": {
+      "title": "Custom Code & AI",
+      "desc": "Write custom JavaScript/Python. Integrate OpenAI, LangChain, AI Agent for smart automation."
+    },
+    "f6": {
+      "title": "Monitoring & Management",
+      "desc": "Detailed execution logs, in-editor debugging, version control, audit logs, and insights dashboard."
+    }
+  },
+  "enterprise": {
+    "title": "Funkcje Enterprise",
+    "desc": "Wszystkie funkcje Enterprise odblokowane",
+    "saml": "Single Sign-On with SAML 2.0 providers",
+    "ldap": "Sync users from Active Directory / LDAP",
+    "oidc": "OpenID Connect for modern authentication",
+    "roles_title": "Custom Roles",
+    "roles": "Fine-grained permissions with custom roles",
+    "audit": "Complete activity logging for compliance",
+    "source": "Manage workflows with Git version control",
+    "secrets": "Integrate HashiCorp Vault, AWS Secrets Manager",
+    "insights": "Track workflow performance with detailed charts",
+    "projects_title": "Team Projects",
+    "projects": "Unlimited team projects & collaboration",
+    "debug_title": "Debug in Editor",
+    "debug": "Debug workflows directly in the visual editor",
+    "vars_title": "Variables",
+    "vars": "Shared variables across the entire workspace",
+    "ai": "AI assistant to help build workflows"
+  },
+  "usecases": {
+    "title": "Real-World Use Cases",
+    "desc": "Popular workflows you can build right now",
+    "u1": {
+      "title": "Smart Telegram/Zalo Chatbot",
+      "desc": "AI chatbot for automatic replies, 24/7 customer care, integrated with OpenAI GPT."
+    },
+    "u2": {
+      "title": "Automated HR Requests",
+      "desc": "Receive leave request → send for approval → update attendance → notify result."
+    },
+    "u3": {
+      "title": "Multi-platform Data Sync",
+      "desc": "Sync data between CRM, ERP, Google Sheets, ensuring real-time consistency."
+    },
+    "u4": {
+      "title": "CI/CD Notification Pipeline",
+      "desc": "GitHub webhook → build → send results via Slack/Email with detailed logs."
+    },
+    "u5": {
+      "tag": "Report",
+      "title": "Automated Daily Reports",
+      "desc": "Collect metrics → generate PDF/Excel reports → email to management."
+    },
+    "u6": {
+      "title": "AI Document Processing",
+      "desc": "Upload invoices → OCR + AI extract → save to database → create processing ticket."
+    }
+  },
+  "guide": {
+    "title": "Zacznij w 5 minut",
+    "desc": "Od logowania do pierwszego workflow",
+    "s1": {
+      "title": "Login / Sign Up",
+      "desc": "Visit n8n.vnso.vn, login with email or create a new account."
+    },
+    "s2": {
+      "title": "Create New Workflow",
+      "desc": "Press Ctrl+Alt+N or click 'Add workflow'. Give it a descriptive name."
+    },
+    "s3": {
+      "title": "Add Trigger Node",
+      "desc": "Choose a trigger: Webhook, Schedule, Email, Telegram... First node is always a trigger."
+    },
+    "s4": {
+      "title": "Connect Action Nodes",
+      "desc": "Drag-and-drop processing nodes: send email, call API, process data. Connect with wires."
+    },
+    "s5": {
+      "title": "Test & Debug",
+      "desc": "Click 'Test workflow' to run. View output per node, debug in editor."
+    },
+    "s6": {
+      "title": "Activate & Monitor",
+      "desc": "Toggle 'Active' to run automatically. Monitor in Executions tab."
+    }
+  },
+  "shortcuts": {
+    "title": "Przydatne skróty",
+    "key": "Shortcut",
+    "action": "Action",
+    "new": "Create new workflow",
+    "save": "Save workflow",
+    "run": "Run workflow",
+    "add": "Add new node",
+    "copy": "Copy / Paste node",
+    "undo": "Undo",
+    "delete": "Delete selected node",
+    "disable": "Enable/Disable node",
+    "fit": "Fit view"
+  },
+  "api": {
+    "title": "REST API & Webhook",
+    "desc": "Integrate with any system via API"
+  },
+  "footer": {
+    "product": "Produkt",
+    "resources": "Zasoby",
+    "tech": "Technologia",
+    "powered": "Napędzane przez"
+  }
+}
